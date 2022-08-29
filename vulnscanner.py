@@ -6,6 +6,7 @@ from colorama import *
 parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--url", help="url", required=True)
 parser.add_argument("-p", "--payloads", help="payloads list", required=True)
+args = parser.parse_args()
 
 def fuzz(url, payloads):
     for payloads in open (payloads, "r").readlines():
@@ -23,10 +24,10 @@ def verif(url):
         sys.exit(Style.BRIGHT + Fore.RED + "Error! Please Try It Again!")
         
     else:
-        fuzz(argparse.url, argparse.payloads)
+        fuzz(args.url, args.payloads)
     
-if not '{fuzz}' in argparse.url:
+if not '{fuzz}' in args.url:
     sys.exit(Style.BRIGHT + Fore.RED + "Missing {fuzz} parameter!")
     
 else:
-    verif(argparse.url)
+    verif(args.url)
